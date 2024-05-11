@@ -5,10 +5,10 @@ import { ProductTable } from "./product-table";
 
 
 export const StoreTable = pgTable("store", {
-    storeId: varchar("id", { length: 30 })
+    storeId: varchar("id")
       .$defaultFn(() => generateUUID())
       .primaryKey(),
-    userId: varchar("user_id").notNull(),
+    userId: varchar("userId").notNull(),
     name: varchar("name").notNull(),
     description: text("description"),
     slug: text("slug").unique(),

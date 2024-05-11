@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Toaster } from 'sonner';
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/themes/theme-provider";
@@ -29,6 +30,7 @@ export default function RootLayout({
             >
               <SiteShell>
                 {children}
+                <Toaster />
               </SiteShell>
           </ThemeProvider>
         </body>
