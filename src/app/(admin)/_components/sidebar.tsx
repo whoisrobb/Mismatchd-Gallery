@@ -11,9 +11,10 @@ const Sidebar = () => {
 
   return (
     <div className='p-4'>
-      {adminConfig.sidebarNav.map((item) => (
+      {adminConfig.sidebarNav.map((item, index) => (
         <Link
             href={`/admin/${item}`}
+            key={index}
             className={cn(
             "group flex w-full items-center rounded border border-transparent px-2 py-1 hover:bg-muted hover:text-foreground",
             item.includes(String(segment))
