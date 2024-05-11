@@ -17,8 +17,8 @@ const Sidebar = () => {
             className={cn(
             "group flex w-full items-center rounded border border-transparent px-2 py-1 hover:bg-muted hover:text-foreground",
             item.includes(String(segment))
-                // ? "bg-muted font-medium text-foreground"
-                // : "text-muted-foreground",
+                ? "bg-muted font-medium text-foreground"
+                : "text-muted-foreground",
             )}
         >
             <span className='capitalize'>{item}</span>
