@@ -1,4 +1,5 @@
 import SiteHeader from '@/components/shells/site-header';
+import { ModeToggle } from '@/components/themes/mode-toggle';
 import React from 'react'
 
 const layout = ({
