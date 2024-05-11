@@ -3,21 +3,21 @@
 import { adminConfig } from '@/config/site-config';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
-import { useSelectedLayoutSegment } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import React from 'react';
 
 const Sidebar = () => {
-    const segment = useSelectedLayoutSegment();
+    const pathname = usePathname();
 
   return (
-    <div className='p-4'>
+    <div className='p-4 space-y-1'>
       {adminConfig.sidebarNav.map((item, index) => (
         <Link
             href={`/admin/${item}`}
             key={index}
             className={cn(
             "group flex w-full items-center rounded border border-transparent px-2 py-1 hover:bg-muted hover:text-foreground",
-            item.includes(String(segment))
+            pathname.split('/').includes(item)
                 ? "bg-muted font-medium text-foreground"
                 : "text-muted-foreground",
             )}
