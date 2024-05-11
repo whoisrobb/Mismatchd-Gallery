@@ -11,7 +11,9 @@
   "dependencies": {
     "@clerk/nextjs": "^5.0.7",
     "@neondatabase/serverless": "^0.9.3",
+    "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-icons": "^1.3.0",
+    "@radix-ui/react-slot": "^1.0.2",
     "@types/uuid": "^9.0.8",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
