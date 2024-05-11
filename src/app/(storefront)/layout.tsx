@@ -1,4 +1,4 @@
-import SiteHeader from '@/components/elements/site-header';
+import SiteHeader from '@/components/shells/site-header';
 import React from 'react'
 
 const layout = ({
