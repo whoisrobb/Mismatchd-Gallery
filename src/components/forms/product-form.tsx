@@ -53,11 +53,11 @@ const ProductForm = ({ storeId, formData }: ProductFormProps) => {
     const form = useForm<InputSchema>({
         resolver: zodResolver(productSchema),
         defaultValues: {
-            name: '',
-            description: '',
-            price: '0',
-            inventory: '0',
-            tags: '',
+            name: formData?.name || '',
+            description: formData?.description || '',
+            price: formData?.price || '0',
+            inventory: formData?.inventory || '0',
+            tags: formData?.tags || '',
         }
     })
 
