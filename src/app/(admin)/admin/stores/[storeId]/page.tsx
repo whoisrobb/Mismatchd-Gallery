@@ -10,7 +10,7 @@ import { useParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
-const page = () => {
+const Stores = () => {
   const { storeId } = useParams();
   const [storeData, setStoreData] = useState<Store | null>(null);
 
@@ -41,4 +41,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Stores

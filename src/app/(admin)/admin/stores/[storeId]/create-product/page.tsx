@@ -4,7 +4,7 @@ import ContentShell from '@/components/shells/content-shell';
 import { usePathname } from 'next/navigation';
 import React from 'react';
 
-const page = () => {
+const CreateProduct = () => {
   const pathname = usePathname();
   const id = pathname.split('/').slice(-2)[0];
   return (
@@ -16,4 +16,4 @@ const page = () => {
   )
 }
 
-export default page
+export default CreateProduct
