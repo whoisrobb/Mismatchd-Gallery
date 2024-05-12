@@ -60,3 +60,23 @@ export const createStore = async (input: CreateStoreProps) => {
         }
     }
 };
+
+// GET SINGLE STORE
+export const getSingleStore = async (storeId: string) => {
+    try {
+        // const store = db.select().from(StoreTable).where(eq(StoreTable.storeId, storeId));
+        const store = await db.query.StoreTable.findFirst({
+            where: eq(StoreTable.storeId, storeId)
+        });
+  
+        if (!store) {
+            throw new Error("Store not found")
+        }
+  
+        return store;
+    } catch (error) {
+        console.error(error)
+    }
+};
+  
+  
