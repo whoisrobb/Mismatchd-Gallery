@@ -1,15 +1,15 @@
-import AdminSection from '@/components/shells/admin-section'
-import { UserProfile } from '@clerk/nextjs'
-import React from 'react'
+import ContentShell from '@/components/shells/content-shell';
+import { UserProfile } from '@clerk/nextjs';
+import React from 'react';
 
 const page = () => {
   return (
-    <AdminSection
+    <ContentShell
         title='Account'
         subtitle='Manage your account settings'
     >
       <UserProfile />
-    </AdminSection>
+    </ContentShell>
   )
 }
 

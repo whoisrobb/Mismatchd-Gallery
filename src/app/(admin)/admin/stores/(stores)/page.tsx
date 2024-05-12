@@ -1,10 +1,10 @@
-import AdminSection from '@/components/shells/admin-section';
 import React from 'react';
 import { auth } from '@clerk/nextjs/server';
 import { getAllStores } from '@/actions/store';
 import CreateStore from '../../_components/create-store';
 import Link from 'next/link';
 import StoreCard from '@/components/elements/store-card';
+import ContentShell from '@/components/shells/content-shell';
 
 
 const page = async () => {
@@ -12,7 +12,7 @@ const page = async () => {
   const { data } = await getAllStores();
 
   return (
-    <AdminSection
+    <ContentShell
       title='Stores'
       subtitle='Manage your stores'
     >
@@ -24,7 +24,7 @@ const page = async () => {
           </Link>
         ))}
       </div>
-    </AdminSection>
+    </ContentShell>
   )
 }
 

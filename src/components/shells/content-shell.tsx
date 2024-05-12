@@ -1,7 +1,4 @@
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { ChevronLeftIcon } from "@radix-ui/react-icons";
-import Link from "next/link";
 import { ReactNode } from "react"
 
 interface ContentSectionProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -10,7 +7,7 @@ interface ContentSectionProps extends React.HTMLAttributes<HTMLDivElement> {
     subtitle?: string,
 }
 
-const AdminSection = ({ children, title, subtitle, className }: ContentSectionProps) => {
+const ContentShell = ({ children, title, subtitle, className }: ContentSectionProps) => {
   return (
     <div className={cn("space-y-6 min-h-[calc(100vh-5rem)] w-full my-4", className)}>
         <div className="mb-6">
@@ -22,4 +19,4 @@ const AdminSection = ({ children, title, subtitle, className }: ContentSectionPr
   )
 }
 
-export default AdminSection;
+export default ContentShell;
