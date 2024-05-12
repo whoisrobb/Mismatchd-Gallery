@@ -169,7 +169,8 @@ const ProductForm = ({ storeId, formData }: ProductFormProps) => {
         <div className="flex items-center justify-between">
             <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
                 <DialogTrigger asChild>
-                    <Button type="button" variant={"ghost"} size={"icon"}>
+                    <Button type="button" className="space-x-1" variant={"outline"} size={"icon"}>
+                      <span>Add images</span>
                         <ImageIcon />
                     </Button>
                 </DialogTrigger>
@@ -192,7 +193,6 @@ const ProductImages = ({ fileUrls }: { fileUrls: FileResponse[] }) => {
 
   return (
     <Table>
-    {/* {JSON.stringify(fileUrls)} */}
       <TableCaption>A list of your recent invoices.</TableCaption>
       <TableHeader>
         <TableRow>
