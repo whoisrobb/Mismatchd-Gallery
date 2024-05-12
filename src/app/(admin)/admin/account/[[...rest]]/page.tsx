@@ -5,8 +5,8 @@ import React from 'react';
 const page = () => {
   return (
     <ContentShell
-        title='Account'
-        subtitle='Manage your account settings'
+      title='Account'
+      subtitle='Manage your account settings'
     >
       <UserProfile />
     </ContentShell>
