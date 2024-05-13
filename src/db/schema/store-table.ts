@@ -2,6 +2,7 @@ import { generateUUID } from "@/lib/utils";
 import { relations, sql } from "drizzle-orm";
 import { boolean, pgTable, text, timestamp, varchar } from "drizzle-orm/pg-core";
 import { ProductTable } from "./product-table";
+import { OrderTable } from "./order-table";
 
 
 export const StoreTable = pgTable("store", {
@@ -21,7 +22,8 @@ export const StoreTable = pgTable("store", {
 export const StoreTableRelations = relations(
     StoreTable, ({ many }) => {
         return {
-            products: many(ProductTable)
+            products: many(ProductTable),
+            orders: many(OrderTable),
         }
     }
 );
