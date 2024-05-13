@@ -2,7 +2,6 @@ import { useDropzone } from "@uploadthing/react";
 import { generateClientDropzoneAccept } from "uploadthing/client";
 
 import { useCallback, useState } from "react";
-import Dropzone from "react-dropzone";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import { Cross2Icon, UploadIcon } from "@radix-ui/react-icons";
