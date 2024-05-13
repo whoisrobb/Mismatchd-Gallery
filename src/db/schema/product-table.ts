@@ -4,6 +4,7 @@ import { decimal, integer, json, pgTable, text, timestamp, varchar } from "drizz
 import { OrderTable } from "./order-table";
 import { DownloadVerificationTable } from "./download-verification-table";
 import { StoreTable } from "./store-table";
+import { OrderItemTable } from "./order-item-table";
 
 
 export const ProductTable = pgTable("product", {
@@ -27,8 +28,8 @@ export const ProductTableRelations = relations(
                 fields: [ProductTable.storeId],
                 references: [StoreTable.storeId]
             }),
-            orders: many(OrderTable),
-            DownloadVerifications: many(DownloadVerificationTable)
+            downloadVerifications: many(DownloadVerificationTable),
+            orderItems: many(OrderItemTable) 
         }
     }
 );
