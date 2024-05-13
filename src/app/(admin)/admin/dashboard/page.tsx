@@ -9,22 +9,27 @@ import {
 } from "@/components/ui/card"
 import { formatCurrency, formatNumber } from '@/lib/utils';
 import { getSalesCount, getStockCount, getTotalRevenue } from '@/actions/dashboard-values';
+import ContentShell from '@/components/shells/content-shell';
   
 
 const Dashboard = async () => {
     const [totalRevenue, salesCount, stockCount] = await Promise.all([getTotalRevenue(), getSalesCount(), getStockCount()])
   return (
-    <div className='grid grid-cols-3 gap-2'>
-      {/* Revenue */}
-      <DashboardCard title={'Revenue'} value={formatCurrency(totalRevenue!)} />
+    <ContentShell
+        title='Dashboard'
+        subtitle='Stats for your site.'
+    >
+        <div className='grid grid-cols-3 gap-2'>
+            {/* Revenue */}
+            <DashboardCard title={'Revenue'} value={formatCurrency(totalRevenue!)} />
 
-      {/* Sales */}
-      <DashboardCard title={'Sales'} value={formatNumber(salesCount?.count!)} />
+            {/* Sales */}
+            <DashboardCard title={'Sales'} value={formatNumber(salesCount?.count!)} />
 
-      {/* In stock */}
-      <DashboardCard title={'In Stock'} value={formatNumber(stockCount?.count!)} />
-
-    </div>
+            {/* In stock */}
+            <DashboardCard title={'In Stock'} value={formatNumber(stockCount?.count!)} />
+        </div>
+    </ContentShell>
   )
 }
 
