@@ -9,9 +9,7 @@ const layout = ({
   }>) => {
   return (
     <div className='min-h-screen flex flex-col'>
-      <SiteHeader>
-        placeholder
-      </SiteHeader>
+      <SiteHeader />
       <div className="grid lg:flex h-[calc(100vh-4rem)]">
         <aside className='border-r w-80 hidden lg:block'>
           <SidebarNav />
