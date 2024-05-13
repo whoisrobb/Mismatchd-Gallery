@@ -169,7 +169,7 @@ const ProductForm = ({ storeId, formData }: ProductFormProps) => {
         <div className="flex items-center justify-between">
             <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
                 <DialogTrigger asChild>
-                    <Button type="button" className="space-x-1" variant={"outline"} size={"icon"}>
+                    <Button type="button" className="space-x-1" variant={"outline"}>
                       <span>Add images</span>
                         <ImageIcon />
                     </Button>
