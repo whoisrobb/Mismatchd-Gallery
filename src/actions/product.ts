@@ -2,6 +2,7 @@
 
 import db from "@/db/drizzle";
 import { ProductTable } from "@/db/schema";
+import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
 type ProductData = {
@@ -32,3 +33,16 @@ export const createProduct = async (productData: ProductData) => {
         console.error(err)
     }
 }
+
+// GET STORE PRODUCTS
+export const getStoreProducts = async (storeId: string) => {
+    try {
+        const storeProducts = await db.query.ProductTable.findMany({
+            where: eq(ProductTable.storeId, storeId)
+        });
+
+        return storeProducts;
+    } catch (err) {
+        console.error(err)
+    }
+};
