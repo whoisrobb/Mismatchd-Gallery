@@ -14,7 +14,6 @@ import { CartProduct, useCart } from "./cart-provider";
 import Image from "next/image";
 import { formatCurrency } from "@/lib/utils";
 import { MinusIcon, PlusIcon } from "@radix-ui/react-icons";
-import { ScrollArea } from "@radix-ui/react-scroll-area";
   
 const CartSheet = () => {
     const { cartQuantity, cartItems } = useCart();
@@ -36,7 +35,7 @@ const CartSheet = () => {
                 <SheetDescription className="h-[calc(100vh-6rem)] overflow-y-scroll pr-10 test">
                     {cartItems && cartItems.length > 0 ?
                         cartItems.map((item) => (
-                            <CartItems item={item} />
+                            <CartItems key={item.productId} item={item} />
                         ))
                     : null}
                 </SheetDescription>
