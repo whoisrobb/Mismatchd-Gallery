@@ -45,6 +45,19 @@ export const getProducts = async () => {
     }
 };
 
+// GET SINGLE PRODUCT
+export const getSingleProduct = async (productId: string) => {
+    try {
+        const singleProduct = await db.query.ProductTable.findFirst({
+            where: eq(ProductTable.productId, productId)
+        });
+
+        return singleProduct;
+    } catch (err) {
+        console.error(err)
+    }
+};
+
 // GET STORE PRODUCTS
 export const getStoreProducts = async (storeId: string) => {
     try {

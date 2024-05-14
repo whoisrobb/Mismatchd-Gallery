@@ -1,4 +1,5 @@
-// import { TProduct } from "@/lib/types/types";
+"use client";
+
 import { Product } from "@/db/schema";
 import { ReactNode, createContext, useContext, useEffect, useState } from "react";
 
