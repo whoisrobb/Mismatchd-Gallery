@@ -2,7 +2,7 @@
 
 import db from "@/db/drizzle";
 import { ProductTable } from "@/db/schema";
-import { arrayContained, arrayContains, eq, inArray } from "drizzle-orm";
+import { arrayContains, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
 type ProductData = {
@@ -33,6 +33,17 @@ export const createProduct = async (productData: ProductData) => {
         console.error(err)
     }
 }
+
+// GET PRODUCTS
+export const getProducts = async () => {
+    try {
+        const products = await db.select().from(ProductTable);
+
+        return products;
+    } catch (err) {
+        console.error(err)
+    }
+};
 
 // GET STORE PRODUCTS
 export const getStoreProducts = async (storeId: string) => {

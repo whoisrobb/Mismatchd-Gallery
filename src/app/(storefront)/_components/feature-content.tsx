@@ -21,7 +21,7 @@ const FeatureContent = ({ children, title, subtitle, href, linkName, className }
           </div>
           {children}
           <div className="">
-              <Link href={`/${href}`}>
+              <Link href={`${href}`}>
                   <Button variant={'outline'} className="flex items-center space-x-2">
                     <p className="">{linkName}</p>
                     <ChevronRightIcon />
