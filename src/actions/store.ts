@@ -64,7 +64,6 @@ export const createStore = async (input: CreateStoreProps) => {
 // GET SINGLE STORE
 export const getSingleStore = async (storeId: string) => {
     try {
-        // const store = db.select().from(StoreTable).where(eq(StoreTable.storeId, storeId));
         const store = await db.query.StoreTable.findFirst({
             where: eq(StoreTable.storeId, storeId)
         });
@@ -79,4 +78,16 @@ export const getSingleStore = async (storeId: string) => {
     }
 };
   
-  
+// GET FEATURED STORES
+export const getFeaturedStores = async () => {
+    try {
+        const stores = await db.select()
+            .from(StoreTable)
+            .limit(5)
+            // .where(arrayContains(ProductTable.tags, ['featured']))
+
+        return stores;
+    } catch (err) {
+        console.error(err);
+    }
+};

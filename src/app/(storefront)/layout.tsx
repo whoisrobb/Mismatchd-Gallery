@@ -1,6 +1,7 @@
 import SiteHeader from '@/components/shells/site-header';
-import { ModeToggle } from '@/components/themes/mode-toggle';
 import React from 'react'
+import StoreNavigation from './_components/store-navigation';
+import Footer from '@/components/elements/footer';
 
 const layout = ({
     children,
@@ -9,10 +10,14 @@ const layout = ({
   }>) => {
   return (
     <div>
-        <SiteHeader>
+        <SiteHeader className='h-24'>
             placeholder
         </SiteHeader>
-        {children}
+        <StoreNavigation />
+        <div className="space-y-24">
+          {children}
+          <Footer />
+        </div>
     </div>
   )
 }

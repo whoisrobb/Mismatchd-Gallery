@@ -2,7 +2,7 @@
 
 import db from "@/db/drizzle";
 import { ProductTable } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { arrayContained, arrayContains, eq, inArray } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
 type ProductData = {
@@ -44,5 +44,19 @@ export const getStoreProducts = async (storeId: string) => {
         return storeProducts;
     } catch (err) {
         console.error(err)
+    }
+};
+
+// GET FEATURED PRODUCTS
+export const getFeaturedProducts = async () => {
+    try {
+        const products = await db.select()
+            .from(ProductTable)
+            .limit(5)
+            // .where(arrayContains(ProductTable.tags, ['featured']))
+
+        return products;
+    } catch (err) {
+        console.error(err);
     }
 };

@@ -5,14 +5,15 @@ import UserButton from '../elements/user-button';
 import { Button } from '../ui/button';
 import { SignedIn, SignedOut } from '@clerk/nextjs';
 import CartSheet from '../cart/cart-sheet';
+import { cn } from '@/lib/utils';
 
-interface SiteHeaderProps {
+interface SiteHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
     children?: ReactNode
 }
 
-const SiteHeader = ({ children }: SiteHeaderProps) => {
+const SiteHeader = ({ children, className }: SiteHeaderProps) => {
   return (
-    <header className='flex justify-between items-center border-b h-16'>
+    <header className={cn('flex z-50 justify-between items-center border-b h-16 sticky top-0 left-0 right-0 bg-background', className)}>
       <Link href={'/'} className='font-bold text-xl'>Mismatchd</Link>
       { children }
       <div className="flex items-center gap-2">
