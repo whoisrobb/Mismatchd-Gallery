@@ -3,7 +3,16 @@ import { Product, Store } from '@/db/schema';
 import React from 'react';
 import ProductsDisplay from '../../_components/products-display';
 
-interface StoreProductsProps extends Store {
+type StoreProductsProps = {
+    name: string;
+    storeId: string;
+    userId: string;
+    description: string | null;
+    slug: string | null;
+    active: boolean;
+    stripeAccountId: string | null;
+    createdAt: Date;
+    updatedAt: Date | null;
     products: Product[]
 }
 
