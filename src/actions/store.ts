@@ -77,6 +77,26 @@ export const getSingleStore = async (storeId: string) => {
         console.error(error)
     }
 };
+
+// GET SINGLE STORE WITH PRODUCTS
+export const getSingleStoreProducts = async (storeId: string) => {
+    try {
+        const store = await db.query.StoreTable.findFirst({
+            where: eq(StoreTable.storeId, storeId),
+            with: {
+                products: true
+            }
+        });
+  
+        if (!store) {
+            throw new Error("Store not found")
+        }
+  
+        return store;
+    } catch (error) {
+        console.error(error)
+    }
+};
   
 // GET FEATURED STORES
 export const getFeaturedStores = async () => {
