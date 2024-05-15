@@ -19,7 +19,7 @@ const page = async () => {
     >
       <CreateStore userId={userId!} />
       <div className="w-full grid lg:grid-cols-4 md:grid-cols-3 gap-4">
-        {data!.map((store) => (
+        {data && data.map((store) => (
           <Link key={store.storeId} href={`/admin/stores/${store.storeId}`}>
             <StoreCard name={store.name} description={store.description!} className='h-40' />
           </Link>

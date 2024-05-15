@@ -16,7 +16,7 @@ export const getOrders = async () => {
                         product: true
                     },
                 },
-                store: true
+                // store: true
             }
         });
 
@@ -24,5 +24,23 @@ export const getOrders = async () => {
 
     } catch (err) {
         console.error(err);
+    }
+}
+
+// CREATE ORDER
+export const createOrder = async () => {
+    try {
+        const data = await db.insert(OrderTable)
+        .values({
+            isPaid: false,
+        })
+        .returning();
+        // .returning({
+        //     orderId: OrderTable.orderId
+        // });
+
+        return data;
+    } catch (err) {
+        console.error(err)
     }
 }

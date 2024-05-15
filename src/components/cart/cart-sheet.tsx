@@ -4,19 +4,42 @@ import {
     Sheet,
     SheetContent,
     SheetDescription,
-    // SheetFooter,
+    SheetFooter,
     SheetHeader,
     SheetTitle,
     SheetTrigger,
-  } from "@/components/ui/sheet";
+} from "@/components/ui/sheet";
+import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { CartProduct, useCart } from "./cart-provider";
 import Image from "next/image";
 import { formatCurrency } from "@/lib/utils";
 import { MinusIcon, PlusIcon } from "@radix-ui/react-icons";
+import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import { toast } from "sonner";
   
 const CartSheet = () => {
     const { cartQuantity, cartItems } = useCart();
+    const searchParams = useSearchParams();
+
+    useEffect(() => {
+        if (searchParams.get("success")) {
+            toast.success("Payment completed.")
+        }
+        if (searchParams.get("canceled")) {
+            toast.error("Something went wrong.")
+        }
+    }, [searchParams])
+
+    const checkout = async () => {
+        const response = await axios.post('/api/checkout', {
+            cartItems: cartItems
+        });
+
+        window.location = response.data.url;
+    }
+
   return (
     <Sheet>
         <SheetTrigger>
@@ -32,7 +55,7 @@ const CartSheet = () => {
         <SheetContent className="flex w-full flex-col pr-0 sm:max-w-lg">
             <SheetHeader>
                 <SheetTitle>Shopping Cart</SheetTitle>
-                <SheetDescription className="h-[calc(100vh-6rem)] overflow-y-scroll pr-10 test">
+                <SheetDescription className="h-[calc(100vh-9rem)] overflow-y-scroll pr-10 test">
                     {cartItems && cartItems.length > 0 ?
                         cartItems.map((item) => (
                             <CartItems key={item.productId} item={item} />
@@ -40,6 +63,16 @@ const CartSheet = () => {
                     : null}
                 </SheetDescription>
             </SheetHeader>
+            <SheetFooter>
+                <Button
+                    className="rounded-full w-full"
+                    size={'lg'}
+                    disabled={cartItems.length < 1}
+                    onClick={checkout}
+                >
+                    Checkout
+                </Button>
+            </SheetFooter>
         </SheetContent>
     </Sheet>
   )
