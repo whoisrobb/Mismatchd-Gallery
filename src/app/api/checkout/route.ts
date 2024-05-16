@@ -2,7 +2,7 @@
 import { createOrder } from "@/actions/order";
 import { CartProduct } from "@/components/cart/cart-provider";
 import db from "@/db/drizzle";
-import { OrderItemTable, OrderTable, ProductTable } from "@/db/schema";
+import { OrderTable, ProductTable } from "@/db/schema";
 import { stripe } from "@/lib/stripe";
 import { inArray } from "drizzle-orm";
 import { NextResponse } from "next/server";
@@ -31,15 +31,7 @@ export async function POST(req: Request) {
         })
     });
 
-    const order = await createOrder()
-        
-    // for (const productId of productIds) {
-    //     await db.insert(OrderItemTable)
-    //         .values({
-    //             orderId: order![0].orderId,
-    //             productId: productId,
-    //         });
-    // }
+    const order = await createOrder(cartItems)
     
     const session = await stripe.checkout.sessions.create({
         line_items,

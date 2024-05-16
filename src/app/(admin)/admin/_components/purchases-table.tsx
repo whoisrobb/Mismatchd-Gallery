@@ -19,8 +19,7 @@ type PurchaseItem = {
     address: string | null,
     isPaid: boolean | null,
     products: string,
-    totalPrice: string,
-    storeName: string,
+    totalPrice: any,
     createdAt: Date,
 }
 
@@ -31,7 +30,6 @@ const PurchasesTable = ({ purchases }: { purchases: PurchaseItem[] }) => {
       <TableHeader>
         <TableRow>
           <TableHead className="">Products</TableHead>
-          <TableHead>Store name</TableHead>
           <TableHead>Address</TableHead>
           <TableHead>Total price</TableHead>
           <TableHead className="">Paid</TableHead>
@@ -44,10 +42,9 @@ const PurchasesTable = ({ purchases }: { purchases: PurchaseItem[] }) => {
         {purchases.map((purchase, index) => (
         <TableRow key={index}>
           <TableCell className="">{purchase.products}</TableCell>
-          <TableCell>{purchase.storeName}</TableCell>
           <TableCell className='capitalize'>{purchase.address}</TableCell>
-          <TableCell>{formatCurrency(Number(purchase.totalPrice))}</TableCell>
-          <TableCell className="">{purchase.isPaid}</TableCell>
+          <TableCell>{purchase.totalPrice}</TableCell>
+          <TableCell className="">{purchase.isPaid == true ? 'true' : 'false'}</TableCell>
 
         <TableCell>
             <DropdownMenu>

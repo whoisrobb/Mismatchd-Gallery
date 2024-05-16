@@ -29,6 +29,9 @@ const Dashboard = async () => {
             {/* In stock */}
             <DashboardCard title={'In Stock'} value={formatNumber(stockCount?.count!)} />
         </div>
+        {`tr -${totalRevenue}`}
+        {`sales -${salesCount}`}
+        {`stock -${stockCount}`}
     </ContentShell>
   )
 }

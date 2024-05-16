@@ -11,11 +11,10 @@ const Purchases = async () => {
         orderId: order.orderId,
         address: order.address,
         isPaid: order.isPaid,
-        products: order.orderItems.map((orderItem) => orderItem.product.name).join(', '),
-        totalPrice: formatCurrency(order.orderItems.reduce((total, item) => {
-            return total + Number(item.product.price)
+        products: order!.products!.map((product) => product.name).join(', '),
+        totalPrice: formatCurrency(order!.products!.reduce((total, item) => {
+            return total + Number(item.price)
         }, 0)),
-        storeName: order.store.name,
         createdAt: order.createdAt
     }))
   return (
