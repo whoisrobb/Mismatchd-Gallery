@@ -3,7 +3,7 @@ export default defineConfig({
     schema: "./src/db/schema",
     dialect: "postgresql",
     dbCredentials: {
-        // url: process.env.DATABASE_URL!
+    //     url: process.env.DATABASE_URL!
 
     // Temporary local database
         user: process.env.DATABASE_USER!,
