@@ -13,6 +13,8 @@ export const ProductTable = pgTable("product", {
     images: json("images").$type<string[] | null>().default(null),
     storeId: varchar("storeId").references(() => StoreTable.storeId).notNull(),
     inventory: integer("inventory").notNull().default(0),
+    category: varchar("category"),
+    subcategory: varchar("subcategory"),
     rating: integer("rating").notNull().default(0),
     tags: json("tags").$type<string[] | null>().default(null),
     createdAt: timestamp("createdAt").defaultNow().notNull(),

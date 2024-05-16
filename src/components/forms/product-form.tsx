@@ -24,7 +24,7 @@ import { z } from "zod";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "../ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogTrigger } from "../ui/dialog";
 import { Cross1Icon, ImageIcon } from "@radix-ui/react-icons";
@@ -33,6 +33,7 @@ import FileInput from "../elements/file-input";
 import Image from "next/image";
 import { createProduct } from "@/actions/product";
 import { toast } from "sonner";
+import { getCategories } from "@/actions/site";
 
 type InputSchema = z.infer<typeof productSchema>;
 
@@ -46,20 +47,43 @@ type ProductFormProps = {
     formData?: ProductFormData
 }
 
+type Category = {
+  categoryId: string,
+  title: string,
+  subcategories: {
+      categoryId: string | null,
+      title: string,
+      description: string,
+      subcategoryId: string,
+  }[],
+}
+
 const ProductForm = ({ storeId, formData }: ProductFormProps) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [fileUrls, setFileUrls] = useState<FileResponse[]>([]);
     const [dialogOpen, setDialogOpen] = useState(false);
+    const [categories, setCategories] = useState<Category[]>([]);
     const form = useForm<InputSchema>({
         resolver: zodResolver(productSchema),
         defaultValues: {
             name: formData?.name || '',
             description: formData?.description || '',
+            category: formData?.category || '',
+            subcategory: formData?.subcategory || '',
             price: formData?.price || '0',
             inventory: formData?.inventory || '0',
             tags: formData?.tags || '',
         }
     })
+  
+    useEffect(() => {
+      fetchCategories();
+    }, [])
+  
+    const fetchCategories = async () => {
+      const data = await getCategories();
+      setCategories(data!);
+    }
 
     const onSubmit = async (values: InputSchema) => {
       const { name, description, price, inventory, tags } = values;
@@ -148,7 +172,7 @@ const ProductForm = ({ storeId, formData }: ProductFormProps) => {
                 name="tags"
                 render={({ field }) => (
                     <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>Tags</FormLabel>
                     <Select onValueChange={field.onChange}>
                         <FormControl>
                         <SelectTrigger>
@@ -164,6 +188,61 @@ const ProductForm = ({ storeId, formData }: ProductFormProps) => {
                     </FormItem>
                 )}
             />
+            
+          <FormField
+            control={form.control}
+            name="category"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Set category</FormLabel>
+                <FormControl>
+
+                  <Select onValueChange={field.onChange}>
+                      <SelectTrigger>
+                          <SelectValue placeholder="Category" />
+                      </SelectTrigger>
+                      <SelectContent>
+                          {categories.map((cat) => (
+                              <SelectItem value={cat.title} key={cat.categoryId}>{cat.title}</SelectItem>
+                          ))}
+                      </SelectContent>
+                  </Select>
+
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="subcategory"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Set sub-category</FormLabel>
+                <FormControl>
+
+                  <Select onValueChange={field.onChange}>
+                      <SelectTrigger>
+                          <SelectValue placeholder="Set sub-category" />
+                      </SelectTrigger>
+                      <SelectContent>
+                          
+                      {categories.map((category) => (
+                          <div key={category.categoryId}>
+                          {category.subcategories.map((subcategory) => (
+                              <SelectItem value={subcategory.title} key={subcategory.subcategoryId} className="subcategory">{subcategory.title}</SelectItem>
+                          ))}
+                          </div>
+                      ))}
+                      </SelectContent>
+                  </Select>
+
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         </div>
         
         <div className="flex items-center justify-between">
