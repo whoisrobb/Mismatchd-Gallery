@@ -31,20 +31,25 @@ import { Cross1Icon, ImageIcon } from "@radix-ui/react-icons";
 import { FileResponse } from "@/lib/types";
 import FileInput from "../elements/file-input";
 import Image from "next/image";
-import { createProduct } from "@/actions/product";
+import { createProduct, updateProduct } from "@/actions/product";
 import { toast } from "sonner";
 import { getCategories } from "@/actions/site";
+import { Product } from "@/db/schema";
 
 type InputSchema = z.infer<typeof productSchema>;
 
-interface ProductFormData extends InputSchema {
-  images: string[],
-  storeId: string
+type ProductFormData = {
+  storeId: string,
+  product?: Product,
 }
+// interface ProductFormData extends InputSchema {
+//   images: string[],
+//   storeId: string
+// }
 
 type ProductFormProps = {
     storeId: string,
-    formData?: ProductFormData
+    productData?: Product
 }
 
 type Category = {
@@ -58,7 +63,7 @@ type Category = {
   }[],
 }
 
-const ProductForm = ({ storeId, formData }: ProductFormProps) => {
+const ProductForm = ({ storeId, productData }: ProductFormProps) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [fileUrls, setFileUrls] = useState<FileResponse[]>([]);
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -66,13 +71,13 @@ const ProductForm = ({ storeId, formData }: ProductFormProps) => {
     const form = useForm<InputSchema>({
         resolver: zodResolver(productSchema),
         defaultValues: {
-            name: formData?.name || '',
-            description: formData?.description || '',
-            category: formData?.category || '',
-            subcategory: formData?.subcategory || '',
-            price: formData?.price || '0',
-            inventory: formData?.inventory || '0',
-            tags: formData?.tags || '',
+            name: productData?.name || '',
+            description: productData?.description || '',
+            category: productData?.category || '',
+            subcategory: productData?.subcategory || '',
+            price: productData?.price || '0',
+            inventory: productData?.inventory.toString() || '0',
+            tags: productData?.tags?.toString() || '',
         }
     })
   
@@ -86,12 +91,30 @@ const ProductForm = ({ storeId, formData }: ProductFormProps) => {
     }
 
     const onSubmit = async (values: InputSchema) => {
-      const { name, description, price, inventory, tags } = values;
+      const { name, description, price, inventory, tags, category, subcategory } = values;
 
-      const productForm = { name, description, price, inventory: Number(inventory), tags: [tags] , storeId, images: fileUrls?.map((fileResponse) => fileResponse.serverData.fileUrl)}
+      const productForm = {
+        name,
+        description,
+        price,
+        inventory: Number(inventory),
+        tags: [tags],
+        storeId,
+        category,
+        subcategory,
+        images: fileUrls?.map((fileResponse) => fileResponse.serverData.fileUrl)
+      }
+
+      const updateForm = {...productForm, productId: productData!.productId}
+      
       setIsSubmitting(true);
+      
+      if (productData) {
+        const data = await updateProduct(updateForm)
+      } else {
+        const data = await createProduct(productForm)
+      }
 
-      const data = await createProduct(productForm)
       toast.success("Successfully created product");
 
       setIsSubmitting(false);

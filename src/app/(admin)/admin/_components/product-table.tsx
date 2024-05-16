@@ -13,6 +13,8 @@ import { formatCurrency } from '@/lib/utils';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 import { DotsHorizontalIcon } from '@radix-ui/react-icons';
+import ProductDelete from './product-delete';
+import Link from 'next/link';
 
 
 const ProductTable = ({ products }: { products: Product[] }) => {
@@ -54,8 +56,10 @@ const ProductTable = ({ products }: { products: Product[] }) => {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                <DropdownMenuItem>Edit</DropdownMenuItem>
-                <DropdownMenuItem>Delete</DropdownMenuItem>
+                <Link href={`/admin/stores/edit-product/${product.productId}`}>
+                  <DropdownMenuItem>Edit</DropdownMenuItem>
+                </Link>
+                <ProductDelete productId={product.productId} />
             </DropdownMenuContent>
             </DropdownMenu>
         </TableCell>

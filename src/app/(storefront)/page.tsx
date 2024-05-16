@@ -4,8 +4,10 @@ import React from 'react';
 import StorefrontBanner from './_components/storefront-banner';
 import FeatureProducts from './_components/feature-products';
 import FeatureStores from './_components/feature-stores';
+import { getProducts } from '@/actions/product';
 
-const Home = () => {
+const Home = async () => {
+  const products = await getProducts();
   return (
     <div className='flex flex-col items-center space-y-32'>
       <div className="h-[calc(100vh-9rem)] object-cover object-center overflow-hidden relative">

@@ -111,3 +111,16 @@ export const getFeaturedStores = async () => {
         console.error(err);
     }
 };
+
+// DELETE STORE
+export const deleteStore = async (storeId: string) => {
+    try {
+        const deleted = await db.delete(StoreTable)
+            .where(eq(StoreTable.storeId, storeId))
+
+        return "Deleted successfully"
+
+    } catch (err) {
+        console.error(err);
+    }
+};

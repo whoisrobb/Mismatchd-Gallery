@@ -2,7 +2,7 @@
 
 import db from "@/db/drizzle";
 import { ProductTable } from "@/db/schema";
-import { arrayContains, eq } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
 type ProductData = {
@@ -13,6 +13,10 @@ type ProductData = {
     inventory: number,
     tags: string[] | null,
     images: string[] | null,
+}
+
+interface ProductUpdate extends ProductData {
+    productId: string
 }
 
 // CREATE SINGLE PRODUCT
@@ -34,10 +38,31 @@ export const createProduct = async (productData: ProductData) => {
     }
 }
 
+// CREATE SINGLE PRODUCT
+export const updateProduct = async (productData: ProductUpdate) => {
+    const { productId } = productData;
+    try {
+        const product = await db
+            .update(ProductTable)
+            .set(productData)
+            .where(eq(ProductTable.productId, productId))
+            .returning({
+                name: ProductTable.name,
+            })
+            .then((res) => res[0])
+                
+        revalidatePath('/admin/stores');
+        return product;
+
+    } catch (err) {
+        console.error(err)
+    }
+}
+
 // GET PRODUCTS
 export const getProducts = async () => {
     try {
-        const products = await db.select().from(ProductTable);
+        const products = await db.query.ProductTable.findMany();
 
         return products;
     } catch (err) {
@@ -80,6 +105,20 @@ export const getFeaturedProducts = async () => {
             // .where(arrayContains(ProductTable.tags, ['featured']))
 
         return products;
+    } catch (err) {
+        console.error(err);
+    }
+};
+
+// DELETE PRODUCT
+export const deleteProduct = async (productId: string) => {
+    try {
+        const deleted = await db.delete(ProductTable)
+            .where(eq(ProductTable.productId, productId))
+
+        revalidatePath('/admin/stores/[storeId]', 'page');
+        return "Deleted successfully"
+
     } catch (err) {
         console.error(err);
     }
