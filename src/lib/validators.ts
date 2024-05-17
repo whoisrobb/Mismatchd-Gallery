@@ -23,3 +23,14 @@ export const subcategorySchema = z.object({
     title: z.string().min(3).max(50),
     description: z.string().min(3).max(255),
 });
+
+export const searchParamsSchema = z.object({
+    // page: z.coerce.number().default(1),
+    // per_page: z.coerce.number().default(10),
+    priceTo: z.string().optional(),
+    priceFrom: z.string().optional(),
+    category: z.string().optional(),
+    subCategory: z.string().optional(),
+    order: z.string().optional(),
+    orderBy: z.string().optional(),
+})

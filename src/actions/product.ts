@@ -2,9 +2,10 @@
 
 import db from "@/db/drizzle";
 import { ProductTable } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { and, asc, desc, eq, gte, lte } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
-import { type ProductForm } from "@/lib/types";
+import { SearchParams, type ProductForm } from "@/lib/types";
+import { searchParamsSchema } from "@/lib/validators";
 
 
 // CREATE SINGLE PRODUCT
@@ -69,9 +70,38 @@ export const updateProduct = async (productData: ProductForm) => {
 }
 
 // GET PRODUCTS
-export const getProducts = async () => {
+export const getProducts = async (searchParams: SearchParams) => {
     try {
-        const products = await db.query.ProductTable.findMany();
+        const search = searchParamsSchema.parse(searchParams)
+        const category = search.category?.split(".").toString() ?? null
+        const subCategory = search.subCategory?.split(".").toString() ?? null
+        const priceFrom = search.priceFrom?.split(".").toString() ?? null
+        const priceTo = search.priceTo?.split(".").toString() ?? null
+        const order = search.order?.split(".").toString() ?? "desc"
+        const orderBy = search.orderBy?.split(".").toString() ?? "createdAt"
+        const products = await db.select()
+            .from(ProductTable)
+            .where(
+              and(
+                category
+                  ? eq(ProductTable.category, category)
+                  : undefined,
+                subCategory
+                  ? eq(ProductTable.subcategory, subCategory)
+                  : undefined,
+                priceFrom ? gte(ProductTable.price, priceFrom) : undefined,
+                priceTo ? lte(ProductTable.price, priceTo) : undefined
+              )
+            )
+            .orderBy(
+                orderBy === "price"
+                    ? order === "asc"
+                        ? asc(ProductTable.price)
+                        : desc(ProductTable.price)
+                : order === "asc"
+                    ? asc(ProductTable.createdAt)
+                    : desc(ProductTable.createdAt)
+            )
 
         return products;
     } catch (err) {

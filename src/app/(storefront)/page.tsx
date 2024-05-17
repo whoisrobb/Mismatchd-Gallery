@@ -1,13 +1,13 @@
-import { ModeToggle } from '@/components/themes/mode-toggle';
 import Image from 'next/image';
 import React from 'react';
 import StorefrontBanner from './_components/storefront-banner';
 import FeatureProducts from './_components/feature-products';
 import FeatureStores from './_components/feature-stores';
 import { getProducts } from '@/actions/product';
+import { ProductsPageProps } from '@/lib/types';
 
-const Home = async () => {
-  const products = await getProducts();
+const Home = async ({ searchParams }: ProductsPageProps) => {
+  // const products = await getProducts(searchParams);
   return (
     <div className='flex flex-col items-center space-y-32'>
       <div className="h-[calc(100vh-9rem)] object-cover object-center overflow-hidden relative">

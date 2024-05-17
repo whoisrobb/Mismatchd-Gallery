@@ -19,3 +19,11 @@ export type ProductForm = {
     productId: string | undefined,
     images: string[],
 }
+
+export interface ProductsPageProps {
+    searchParams: SearchParams
+}
+
+export interface SearchParams {
+    [key: string]: string | string[] | undefined
+}

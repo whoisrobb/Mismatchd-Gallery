@@ -11,21 +11,12 @@ import {
   } from "@/components/ui/sheet"
 import { Button } from '@/components/ui/button'
 import SearchFilters from '../_components/search-filters'
-  
+import { ProductsPageProps } from '@/lib/types'
+
 
 const Products = async ({
-  searchParams }: {
-    searchParams: { [key: string]: string | string[] | undefined }
-  }) => {
-
-    const priceFrom = searchParams.priceFrom
-    const priceTo = searchParams.priceTo
-    const order = searchParams.order
-    const orderBy = searchParams.orderBy
-    const category = searchParams.category
-    const subCategory = searchParams.subCategory
-
-    const products = await getProducts()
+  searchParams }: ProductsPageProps) => {
+    const products = await getProducts(searchParams);
   return (
     <div>
       <Sheet>
@@ -44,9 +35,7 @@ const Products = async ({
         </SheetContent>
       </Sheet>
 
-      {JSON.stringify(searchParams)}
-
-      <ProductsDisplay products={products!} /> 
+      <ProductsDisplay products={products!} />
     </div>
   )
 }
