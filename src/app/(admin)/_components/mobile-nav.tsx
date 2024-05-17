@@ -13,9 +13,6 @@ const MobileSideNav = () => {
                 <HamburgerMenuIcon />
             </Button>
         </SheetTrigger>
-        <MobileNav>
-            placeholder
-        </MobileNav>
       </Sheet>
     </div>
   )
