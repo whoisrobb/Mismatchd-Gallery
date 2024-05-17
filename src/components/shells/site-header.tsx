@@ -7,6 +7,8 @@ import { SignedIn, SignedOut } from '@clerk/nextjs';
 import CartSheet from '../cart/cart-sheet';
 import { cn } from '@/lib/utils';
 import MobileNav from '../elements/mobile-nav';
+import { toast } from 'sonner';
+import SignInButton from '../elements/sign-in-button';
 
 interface SiteHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
     children?: ReactNode
@@ -28,7 +30,7 @@ const SiteHeader = ({ children, className }: SiteHeaderProps) => {
 
         <SignedOut>
           <Link href={'/sign-in'}>
-            <Button>Sign in</Button>
+            <SignInButton />
           </Link>
         </SignedOut>
       </div>
