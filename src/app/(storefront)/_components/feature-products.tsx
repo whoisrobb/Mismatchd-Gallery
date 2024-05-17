@@ -2,6 +2,7 @@ import React from 'react';
 import FeatureContent from './feature-content';
 import { getFeaturedProducts } from '@/actions/product';
 import ProductCard from '@/components/elements/product-card';
+import ProductsDisplay from './products-display';
 
 const FeatureProducts = async () => {
     const products = await getFeaturedProducts()
@@ -12,11 +13,7 @@ const FeatureProducts = async () => {
       href='/products'
       linkName='View products'
     >
-      <div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 gap-2">
-        {products?.map((product) => (
-            <ProductCard key={product.productId} {...product} />
-        ))}
-      </div>
+      <ProductsDisplay products={products!} />
     </FeatureContent>
   )
 }
