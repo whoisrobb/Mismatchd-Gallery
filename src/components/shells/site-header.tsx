@@ -20,7 +20,7 @@ const SiteHeader = ({ children, className }: SiteHeaderProps) => {
       <Link href={'/'} className='font-bold text-xl'>Mismatchd</Link>
       { children }
       <div className="flex items-center gap-2">
-        {children && <CartSheet />}
+        <CartSheet />
 
         <SignedIn>
           <UserButton />
