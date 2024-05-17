@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { getCategories } from "@/actions/site";
-// Define the types for the site configuration
 
 export interface SiteNavItem {
     title: string;

@@ -9,14 +9,11 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-// import { SignOutButton, useUser } from "@clerk/clerk-react";
-// import { Link, useNavigate } from "react-router-dom";
 import { DashboardIcon, ExitIcon, GearIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { SignOutButton, useUser } from "@clerk/nextjs";
 
 const UserButton = () => {
-    // const navigate = useNavigate();
     const { user } = useUser();
   return (
     <DropdownMenu>

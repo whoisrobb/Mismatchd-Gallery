@@ -4,17 +4,13 @@ import React from "react";
 import {
     NavigationMenu,
     NavigationMenuContent,
-    // NavigationMenuIndicator,
     NavigationMenuItem,
     NavigationMenuLink,
     NavigationMenuList,
     NavigationMenuTrigger,
-    // NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
-// import { siteConfig } from "../_config/useSiteConfig";
 import { cn } from "@/lib/utils";
 import { useSiteConfig } from "../_config/useSiteConfig";
-// import Link from "next/link";
   
 
 const NavElement = () => {
@@ -34,7 +30,6 @@ const NavElement = () => {
                                   className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
                                   href="/"
                               >
-                                  {/* <Icons.logo className="h-6 w-6" /> */}
                                   <div className="mb-2 mt-4 text-lg font-medium">
                                       {siteConfig!.name}
                                   </div>
