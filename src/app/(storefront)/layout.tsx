@@ -10,9 +10,7 @@ const layout = ({
   }>) => {
   return (
     <div>
-        <SiteHeader className='h-24'>
-            placeholder
-        </SiteHeader>
+        <SiteHeader className='h-24' />
         <StoreNavigation />
         <div className="space-y-24">
           {children}
