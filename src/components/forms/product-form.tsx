@@ -104,8 +104,8 @@ const ProductForm = ({ storeId, productData }: ProductFormProps) => {
       toast.success("Successfully created product");
 
       setIsSubmitting(false);
-      // form.reset();
-      // setFileUrls([]);
+      form.reset();
+      setFileUrls([]);
     };
 
     const addFiles = (files: FileResponse[]) => {
