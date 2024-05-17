@@ -8,7 +8,7 @@ const SignInButton = () => {
   return (
     <div>
         <Button
-            onClick={() => toast.info("Hey there👋. Test Email: test@example.com, Password: password1")}
+            onClick={() => toast.info("Hey there👋. Test Email: test@example.com, Password: password")}
         >
             Sign in
         </Button>

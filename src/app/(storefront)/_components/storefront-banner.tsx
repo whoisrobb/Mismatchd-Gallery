@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const StorefrontBanner = () => {
   return (
-    <div className="flex flex-col items-center text-center h-[calc(100vh-5rem)] justify-center gap-4 max-w-6xl absolute top-0 bottom-0 right-12 left-12">
+    <div className="flex flex-col items-center text-center justify-center gap-4 max-w-6xl">
         <Link href={'https://github.com/whoisrobb/mismatchd-gallery'} target="_blank">
             <Button variant={'secondary'} className="flex items-center">
                 <GitHubLogoIcon className="mr-2" />
