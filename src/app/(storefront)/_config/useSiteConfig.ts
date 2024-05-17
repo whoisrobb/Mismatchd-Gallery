@@ -36,8 +36,8 @@ export function useSiteConfig() {
                 const categories = await getCategories();
                 const config = {
                     name: "Mismatchd",
-                    description: "An ecommerce app with an integrated CMS dashboard built with React, Express, and PostgreSQL.",
-                    url: "https://skateshop.sadmn.com",
+                    description: "An ecommerce app with an integrated CMS dashboard built with Next Js and PostgreSQL.",
+                    url: "https://mismatchd-gallery.vercel.app",
                     ogImage: "",
                     siteNav: {
                         title: "Store-front",
