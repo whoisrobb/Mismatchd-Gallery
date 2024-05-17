@@ -6,3 +6,16 @@ export type FileResponse = {
         uploadedBy: string;
     }
 }
+
+export type ProductForm = {
+    name: string,
+    description: string,
+    price: string,
+    inventory: number,
+    tags: string[],
+    storeId: string,
+    category: string,
+    subcategory: string,
+    productId: string | undefined,
+    images: string[],
+}

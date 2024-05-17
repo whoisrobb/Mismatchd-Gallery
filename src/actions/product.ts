@@ -4,32 +4,20 @@ import db from "@/db/drizzle";
 import { ProductTable } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
+import { type ProductForm } from "@/lib/types";
 
-type ProductData = {
-    name: string,
-    description: string,
-    storeId: string,
-    price: string,
-    inventory: number,
-    tags: string[] | null,
-    images: string[] | null,
-}
-
-interface ProductUpdate extends ProductData {
-    productId: string
-}
 
 // CREATE SINGLE PRODUCT
-export const createProduct = async (productData: ProductData) => {
+export const createOrUpdateProduct = async (productData: ProductForm) => {
     try {
-        const product = await db
-            .insert(ProductTable)
-            .values(productData)
-            .returning({
-                name: ProductTable.name,
-            })
-            .then((res) => res[0])
-                
+        let product;
+
+        if (!productData.productId || productData.productId == undefined) {
+            product = await createProduct(productData)
+        } else {
+            product = await updateProduct(productData)
+        }
+          
         revalidatePath('/admin/stores');
         return product;
 
@@ -39,8 +27,29 @@ export const createProduct = async (productData: ProductData) => {
 }
 
 // CREATE SINGLE PRODUCT
-export const updateProduct = async (productData: ProductUpdate) => {
-    const { productId } = productData;
+export const createProduct = async (productData: ProductForm) => {
+    try {
+        const product = await db
+            .insert(ProductTable)
+            .values(productData)
+            .returning({
+                name: ProductTable.name,
+            })
+            .then((res) => res[0])
+            
+        revalidatePath('/admin/stores');
+
+        return product;
+
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+// UPDATE SINGLE PRODUCT
+export const updateProduct = async (productData: ProductForm) => {
+    const productId = productData.productId!;
+    
     try {
         const product = await db
             .update(ProductTable)
