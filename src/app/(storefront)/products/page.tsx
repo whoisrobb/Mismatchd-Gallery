@@ -18,7 +18,7 @@ const Products = async ({
   searchParams }: ProductsPageProps) => {
     const products = await getProducts(searchParams);
   return (
-    <div>
+    <div className='space-y-6'>
       <Sheet>
         <SheetTrigger>
           <Button>
@@ -27,7 +27,7 @@ const Products = async ({
         </SheetTrigger>
         <SheetContent>
           <SheetHeader>
-          <SheetTitle>Are you absolutely sure?</SheetTitle>
+          <SheetTitle>Filters</SheetTitle>
           <SheetDescription>
             <SearchFilters />
           </SheetDescription>
